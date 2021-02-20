@@ -40,3 +40,5 @@ woman:-woman(Y),write(Y),nl,fail.
 children(X):-parent(X,Y),write(Y),nl,fail.
 mother(X,Y):-parent(X,Y),woman(X).
 mother(X):-parent(Y,X),woman(Y),write(Y),nl,fail.
+son(X,Y):-parent(Y,X).
+son(X):-parent(X,Y),man(Y),write(Y),nl,fail.
