@@ -48,3 +48,7 @@ husband(X,Y):-parent(Y,Z),parent(X,Z).
 husband(X):-parent(X,Y),parent(Z,Y),man(Z),write(Z),!.
 b_s(X,Y):-parent(Z,X),parent(Z,Y),dif(X,Y).
 b_s(X):-parent(Z,X),parent(Z,Y),woman(Z),dif(X,Y),write(Y),nl,fail.
+grand_pa(X,Y):-parent(Z,Y),parent(X,Z),man(X).
+grand_pas(X):-parent(Z,X),parent(Y,Z),man(Y),write(Y),nl,fail.
+grand_so(X,Y):-parent(Z,X),parent(Y,Z),man(X),!.
+grand_sons(X):-parent(X,Y),parent(Y,Z),man(X),write(Z),nl,fail.
