@@ -44,3 +44,5 @@ son(X,Y):-parent(Y,X).
 son(X):-parent(X,Y),man(Y),write(Y),nl,fail.
 brother(X,Y):-man(X),parent(Z,X),parent(Z,Y),woman(Z).
 brothers(X):-brother(Y,X),dif(X,Y),write(Y),nl,fail.
+husband(X,Y):-parent(Y,Z),parent(X,Z).
+husband(X):-parent(X,Y),parent(Z,Y),man(Z),write(Z),!.
