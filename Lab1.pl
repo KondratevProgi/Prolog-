@@ -53,4 +53,4 @@ grand_pas(X):-parent(Z,X),parent(Y,Z),man(Y),write(Y),nl,fail.
 grand_so(X,Y):-parent(Z,X),parent(Y,Z),man(X),!.
 grand_sons(X):-parent(X,Y),parent(Y,Z),man(Z),write(Z),nl,fail.
 grand_pa_and_son(X,Y):-grand_pa(X,Y),man(Y);grand_pa(Y,X),man(X),!.
-
+grand_pa_and_da(X,Y):-parent(X,Z),parent(Z,Y),woman(Y);parent(Y,Z),parent(Z,X),woman(X).
