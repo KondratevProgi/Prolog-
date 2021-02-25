@@ -42,7 +42,7 @@ mother(X,Y):-parent(X,Y),woman(X).
 mother(X):-parent(Y,X),woman(Y),write(Y),nl,fail.
 son(X,Y):-parent(Y,X).
 son(X):-parent(X,Y),man(Y),write(Y),nl,fail.
-brother(X,Y):-man(X),parent(Z,X),parent(Z,Y),woman(Z).
+brother(X,Y):-parent(Z,X),parent(Z,Y),man(X),woman(Z).
 brothers(X):-brother(Y,X),dif(X,Y),write(Y),nl,fail.
 husband(X,Y):-parent(Y,Z),parent(X,Z).
 husband(X):-parent(X,Y),parent(Z,Y),man(Z),write(Z),!.
@@ -54,7 +54,7 @@ grand_so(X,Y):-parent(Z,X),parent(Y,Z),man(X),!.
 grand_sons(X):-parent(X,Y),parent(Y,Z),man(Z),write(Z),nl,fail.
 grand_pa_and_son(X,Y):-grand_pa(X,Y),man(Y);grand_pa(Y,X),man(X),!.
 grand_pa_and_da(X,Y):-parent(X,Z),parent(Z,Y),woman(Y);parent(Y,Z),parent(Z,X),woman(X).
-uncle(X,Y):-parent(Z,Y),brother(X,Z).
+uncle(X,Y):-parent(Z,Y),b_s(X,Z).
 uncle(X):-uncle(Y,X),write(Y),nl,fail.
-pleman(X,Y):-woman(X),parent(Z,X),b_s(Y,Z),dif(Z,Y).
+pleman(X,Y):-woman(X),parent(Z,X),b_s(Y,Z).
 pleman(X):-pleman(Y,X),write(Y),nl,fail.
