@@ -56,5 +56,5 @@ grand_pa_and_son(X,Y):-grand_pa(X,Y),man(Y);grand_pa(Y,X),man(X),!.
 grand_pa_and_da(X,Y):-parent(X,Z),parent(Z,Y),woman(Y);parent(Y,Z),parent(Z,X),woman(X).
 uncle(X,Y):-parent(Z,Y),brother(X,Z),dif(Z,X),!.
 uncle(X):-uncle(Y,X),write(Y),nl,fail.
-pleman(X,Y):-woman(X),parent(Z,X),b_s(Y,Z).
+pleman(X,Y):-woman(X),parent(Z,X),parent(F,Z),parent(F,Y),dif(Y,Z),woman(F).
 pleman(X):-pleman(Y,X),write(Y),nl,fail.
