@@ -198,31 +198,31 @@ pol(vaish,0).
 pol(teronkrov,1).
 pol(keltyzad,1).
 
-quest1(X1):-write("Ваш персонаж за добро или зло?"),nl,
-                  write("0.Зло"),nl,
-                  write("1.Добро"),nl,read(X1).
+quest1(X1):-write("Vash personag za dobro ili zlo?"),nl,
+                  write("0.Zlo"),nl,
+                  write("1.Dobro"),nl,read(X1).
 
-quest2(X2):-write("К какой фракции принадлежит ваш персонаж?"),nl,
-                  write("0.Нейтрал"),nl,
-                  write("1.Альянс"),nl,
-                  write("2.Орда"),nl,read(X2).
+quest2(X2):-write("K kakoi fraction otnositsa vash personag?"),nl,
+                  write("0.Neitral"),nl,
+                  write("1.Alience"),nl,
+                  write("2.Horde"),nl,read(X2).
 
-quest3(X3):-write("К какой расе принадлежит ваш персонаж?"),nl,
-                  write("0.Разные"),nl,write("1.Люди"),nl,
-                  write("2.Дворф") ,nl,write("3.Ночной эльф"),nl,
-                  write("4.Гном")  ,nl,write("5.Дреней"),nl,
-                  write("6.Ворген"),nl,write("7.Орк"),nl,
-                  write("8.Нежить"),nl,write("9.Таурен"),nl,
-                  write("10.Троль"),nl,write("11.Эльф крови"),nl,
-                  write("12.Гоблин"),nl,read(X3).
+quest3(X3):-write("K Kakoi rase prinadlegit vash personag?"),nl,
+                  write("0.Raznoe"),nl,write("1.Human"),nl,
+                  write("2.Dforf") ,nl,write("3.Nochnoi elf"),nl,
+                  write("4.Gnom")  ,nl,write("5.Drenei"),nl,
+                  write("6.Vorgen"),nl,write("7.Ork"),nl,
+                  write("8.Negit"),nl,write("9.Tayren"),nl,
+                  write("10.Troll"),nl,write("11.Elf krovi"),nl,
+                  write("12.Goblin"),nl,read(X3).
 
-quest4(X4):-write("Какой класс у вашего персонажа?"),nl,
-                  write("0.Неизвестно")  ,nl,write("1.Воин"),nl,
-                  write("2.Паладин")     ,nl,write("3.Охотник"),nl,
-                  write("4.Разбойник")   ,nl,write("5.Жрец"),nl,
-                  write("6.Шаман")       ,nl,write("7.Маг"),nl,
-                  write("8.Чернокнижник"),nl,write("9.Друид"),nl,
-                  write("10.РыцСмерти")  ,nl,write("11.ДемонХантер"),nl,read(X4).
+quest4(X4):-write("Kakoi class y vashego personaga?"),nl,
+                  write("0.Neizvestno")  ,nl,write("1.Voin"),nl,
+                  write("2.Paladin")     ,nl,write("3.Oxotnik"),nl,
+                  write("4.Razboinik")   ,nl,write("5.Priest"),nl,
+                  write("6.Shaman")      ,nl,write("7.Mag"),nl,
+                  write("8.Chernoknig")  ,nl,write("9.Dryid"),nl,
+                  write("10.RicarSmerti"),nl,write("11.DemonXant"),nl,read(X4).
 
-quest5(X5):-write("Какой пол у вашего персонажа?"),nl,
-                  write("0.Женщина"),nl,write("1.Мужчина"),nl,read(X5).
+quest5(X5):-write("Kakoi pol vashego personaga?"),nl,
+                  write("0.Woman"),nl,write("1.Man"),nl,read(X5).
