@@ -208,12 +208,12 @@ quest2(X2):-write("K kakoi fraction otnositsa vash personag?"),nl,
                   write("2.Horde"),nl,read(X2).
 
 quest3(X3):-write("K Kakoi rase prinadlegit vash personag?"),nl,
-                  write("0.Raznoe"),nl,write("1.Human"),nl,
-                  write("2.Dforf") ,nl,write("3.Nochnoi elf"),nl,
-                  write("4.Gnom")  ,nl,write("5.Drenei"),nl,
-                  write("6.Vorgen"),nl,write("7.Ork"),nl,
-                  write("8.Negit"),nl,write("9.Tayren"),nl,
-                  write("10.Troll"),nl,write("11.Elf krovi"),nl,
+                  write("0.Raznoe") ,nl,write("1.Human"),nl,
+                  write("2.Dforf")  ,nl,write("3.Nochnoi elf"),nl,
+                  write("4.Gnom")   ,nl,write("5.Drenei"),nl,
+                  write("6.Vorgen") ,nl,write("7.Ork"),nl,
+                  write("8.Negit")  ,nl,write("9.Tayren"),nl,
+                  write("10.Troll") ,nl,write("11.Elf krovi"),nl,
                   write("12.Goblin"),nl,read(X3).
 
 quest4(X4):-write("Kakoi class y vashego personaga?"),nl,
@@ -225,4 +225,8 @@ quest4(X4):-write("Kakoi class y vashego personaga?"),nl,
                   write("10.RicarSmerti"),nl,write("11.DemonXant"),nl,read(X4).
 
 quest5(X5):-write("Kakoi pol vashego personaga?"),nl,
-                  write("0.Woman"),nl,write("1.Man"),nl,read(X5).
+                  write("0.Woman"),nl,
+                  write("1.Man"),nl,read(X5).
+
+pr:-quest1(X1),quest2(X2),quest3(X3),quest4(X4),quest5(X5),
+    party(X,X1),faction(X,X2),rasa(X,X3),class(X,X4),pol(X,X5),write(X).
