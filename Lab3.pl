@@ -23,3 +23,10 @@ factd(N,X):-fact(N,1,X).
 fib(1,1):-!.
 fib(2,1):-!.
 fib(N,X):-N1 is N-1,N2 is N-2,fib(N1,X1),fib(N2,X2),X is X1+X2.
+
+%Nomer #6
+%Recursion down
+fib(1,_,ConX1,ConX1):-!.
+fib(2,_,ConX1,ConX1):-!.
+fib(N,ConX1,ConX2,X):-ConX3 is ConX1+ConX2, N1 is N-1,fib(N1,ConX2,ConX3,X).
+fibd(N,X):-fib(N,1,1,X).
