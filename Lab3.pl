@@ -35,3 +35,9 @@ fibd(N,X):-fib(N,1,1,X).
 %Recursion up
 sumaChisla(0,0):-!.
 sumaChisla(N,Sum):- Mod is N mod 10, N1 is N div 10,sumaChisla(N1,Sum1),Sum is Sum1 + Mod.
+
+%Nomer #8
+%Recursion down
+sumaChisla(0,ComS,ComS):-!.
+sumaChisla(N,ComS,Sum):-Mod is N mod 10,N1 is N div 10,ComS1 is ComS + Mod,sumaChisla(N1,ComS1,Sum).
+sumaChislad(N,Sum):-sumaChisla(N,0,Sum).
