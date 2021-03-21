@@ -5,6 +5,8 @@ man(andrey).
 man(ivan).
 man(seva).
 man(leon).
+man(zeus).
+man(ares).
 
 woman(eve).
 woman(nastya).
@@ -13,6 +15,8 @@ woman(alice).
 woman(ale).
 woman(katya).
 woman(sonya).
+woman(afina).
+woman(terra).
 
 parent(adam,vova).
 parent(adam,anna).
@@ -34,6 +38,11 @@ parent(anna,leon).
 parent(anna,ale).
 parent(anna,katya).
 parent(anna,sonya).
+
+parent(ares,andrey).
+parent(terra,andrey).
+parent(zeus,nastya).
+parent(afina,nastya).
 
 man:-man(X),write(X),nl,fail.
 woman:-woman(Y),write(Y),nl,fail.
