@@ -30,3 +30,8 @@ fib(1,_,ConX1,ConX1):-!.
 fib(2,_,ConX1,ConX1):-!.
 fib(N,ConX1,ConX2,X):-ConX3 is ConX1+ConX2, N1 is N-1,fib(N1,ConX2,ConX3,X).
 fibd(N,X):-fib(N,1,1,X).
+
+%Nomer #7
+%Recursion up
+sumaChisla(0,0):-!.
+sumaChisla(N,Sum):- Mod is N mod 10, N1 is N div 10,sumaChisla(N1,Sum1),Sum is Sum1 + Mod.
