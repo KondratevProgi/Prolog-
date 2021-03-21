@@ -18,3 +18,8 @@ fact(1,ConX,ConX):-!.
 fact(N,ConX,X):-ConX1 is ConX*N, N1 is N-1,fact(N1,ConX1,X).
 factd(N,X):-fact(N,1,X).
 
+%Nomer #5
+%Recursion up
+fib(1,1):-!.
+fib(2,1):-!.
+fib(N,X):-N1 is N-1,N2 is N-2,fib(N1,X1),fib(N2,X2),X is X1+X2.
