@@ -41,3 +41,8 @@ sumaChisla(N,Sum):- Mod is N mod 10, N1 is N div 10,sumaChisla(N1,Sum1),Sum is S
 sumaChisla(0,ComS,ComS):-!.
 sumaChisla(N,ComS,Sum):-Mod is N mod 10,N1 is N div 10,ComS1 is ComS + Mod,sumaChisla(N1,ComS1,Sum).
 sumaChislad(N,Sum):-sumaChisla(N,0,Sum).
+
+%Nomer #9 Var 5
+%Recursion up
+max(Max,Max):-Max div 10 =:= 0,!.
+max(N,Max):-Max2 is N mod 10, N1 is N div 10,max(N1,Max1),(Max1>Max2 -> Max is Max1;Max is Max2).
