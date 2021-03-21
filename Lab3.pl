@@ -46,3 +46,9 @@ sumaChislad(N,Sum):-sumaChisla(N,0,Sum).
 %Recursion up
 max(Max,Max):-Max div 10 =:= 0,!.
 max(N,Max):-Max2 is N mod 10, N1 is N div 10,max(N1,Max1),(Max1>Max2 -> Max is Max1;Max is Max2).
+
+%Nomer #10 Var 5
+%Recursion down
+maxx(0,CosMax,CosMax):-!.
+maxx(N,CosMax,Max):-CosMax1 is N mod 10,N1 is N div 10,(CosMax1>CosMax -> CosMax2 is CosMax1;CosMax2 is CosMax), maxx(N1,CosMax2,Max).
+maxd(N,Max):-maxx(N,0,Max).
