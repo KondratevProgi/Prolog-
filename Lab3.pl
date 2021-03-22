@@ -52,3 +52,11 @@ max(N,Max):-Max2 is N mod 10, N1 is N div 10,max(N1,Max1),(Max1>Max2 -> Max is M
 maxx(0,CosMax,CosMax):-!.
 maxx(N,CosMax,Max):-CosMax1 is N mod 10,N1 is N div 10,(CosMax1>CosMax -> CosMax2 is CosMax1;CosMax2 is CosMax), maxx(N1,CosMax2,Max).
 maxd(N,Max):-maxx(N,0,Max).
+
+%Nomer #12
+nod(_,_,1,1):-!.
+nod(N1,N2,CosNod,Nod):-N1 mod CosNod =:= 0,N2 mod CosNod =:= 0,Nod is CosNod,!.
+nod(N1,N2,CosNod,Nod):-CosNod1 is CosNod -1,nod(N1,N2,CosNod1,Nod).
+noda(N1,N2,Nod):-(N1 > N2-> nod(N1,N2,N2,Nod); nod(N1,N2,N1,Nod)).
+
+
