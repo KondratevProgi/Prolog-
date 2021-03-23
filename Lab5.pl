@@ -47,8 +47,8 @@ pr_ein :- Houses = [_, _ ,_ ,_ ,_],
 
 		in_list(Houses, [_, WHO1, water, _, _]),
 		in_list(Houses, [_, WHO2, _, zebra, _]),
-		write(Houses),
-		write(WHO1), nl, write(WHO2).
+		write(Houses),nl,
+		write(WHO1), nl, write(WHO2),!.
 
 %Nomer 2
 pr_friends:- Friends = [_,_,_],
@@ -154,5 +154,33 @@ pr_sorev:- Sorev = [_,_,_],
                 write(Name),nl,
                 write(Sport),nl,
                 write(Sorev),!.
+
+%Nomer 8 Var 5
+pr_domino:- Domino = [_,_,_,_],
+
+                in_list(Domino,[kyznecov,_]),
+                in_list(Domino,[tokarev,_]),
+                in_list(Domino,[slesarev,_]),
+                in_list(Domino,[rezchikov,_]),
+                in_list(Domino,[_,kyznec]),
+                in_list(Domino,[_,tokar]),
+                in_list(Domino,[_,slesar]),
+                in_list(Domino,[_,rezchik]),
+
+                not(in_list(Domino,[kyznecov,kyznec])),
+                not(in_list(Domino,[tokarev,tokar])),
+                not(in_list(Domino,[slesarev,slesar])),
+                not(in_list(Domino,[rezchikov,rezchik])),
+
+                not(in_list(Domino,[kyznecov,slesar])),
+
+                sprava_next([slesarev,_],[_,tokar],Domino),
+
+                sleva_next([_,kyznec],[Name,_],Domino),
+
+                write(Name),nl,
+                write(Domino),!.
+
+
 
 
