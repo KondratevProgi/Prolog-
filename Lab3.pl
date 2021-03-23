@@ -59,4 +59,9 @@ nod(N1,N2,CosNod,Nod):-N1 mod CosNod =:= 0,N2 mod CosNod =:= 0,Nod is CosNod,!.
 nod(N1,N2,CosNod,Nod):-CosNod1 is CosNod -1,nod(N1,N2,CosNod1,Nod).
 noda(N1,N2,Nod):-(N1 > N2-> nod(N1,N2,N2,Nod); nod(N1,N2,N1,Nod)).
 
+min(X,Y,Z):-X<Y,Z is X,!.
+min(_,Y,Z):-Z is Y,!.
+nod1(N1,N1,N1):-!.
+nod1(N1,N2,Nod):-max(N1,N2,Max),min(N1,N2,Min),M is Max-Min,((N1 =Max,nod1(M,N2,Nod),!);(nod1(N1,M,Nod),!)).
+
 
