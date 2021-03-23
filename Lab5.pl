@@ -84,5 +84,17 @@ pr_girls:- Girls = [_,_,_],
 
                 write(Girls),!.
 
+%Nomer 4
+pr_factory:-Factory = [_,_,_],
+
+                in_list(Factory,[slesar,_,netbs,mlad]),
+                in_list(Factory,[tokar,_,_,sred]),
+                in_list(Factory,[svarschik,_,_,_]),
+                in_list(Factory,[_,borisov,yess,_]),
+                in_list(Factory,[_,ivanov,_,_]),
+                in_list(Factory,[_,semenov,_,star]),
+
+                write(Factory),!.
+
 
 
