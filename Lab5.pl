@@ -119,6 +119,24 @@ pr_emkost:- Emkost = [_,_,_,_],
 
                 write(Emkost),!.
 
+%Nomer 6
+pr_talant:- Talant = [_,_,_,_],
+
+                in_list(Talant, [voronov, _, concert, writer]),
+		in_list(Talant, [pavlov, _, _, artist]),
+		in_list(Talant, [levitskiy, _, concert, _]),
+		in_list(Talant, [saharov, _, _, writer]),
+
+		in_list(Talant, [_, dancer, _, _]),
+		in_list(Talant, [_, artist, _, _]),
+		in_list(Talant, [_, singer, concert, _]),
+		in_list(Talant, [_, writer, _, artist]),
+
+		not(in_list(Talant, [pavlov, _, writer, _])),
+		not(in_list(Talant, [levitskiy, _, singer, _])),
+
+		write(Talant), !.
+
 
 
 
