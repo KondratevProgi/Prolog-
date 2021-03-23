@@ -50,6 +50,7 @@ pr_ein :- Houses = [_, _ ,_ ,_ ,_],
 		write(Houses),
 		write(WHO1), nl, write(WHO2).
 
+%Nomer 2
 pr_friends:- Friends = [_,_,_],
 
                 in_list(Friends,[belokurov,_]),
@@ -64,3 +65,24 @@ pr_friends:- Friends = [_,_,_],
 		not(in_list(Friends, [rijov, red])),
 
 		write(Friends), !.
+
+%Nomer 3
+pr_girls:- Girls = [_,_,_],
+
+                in_list(Girls,[_,white,_]),
+                in_list(Girls,[_,green,_]),
+                in_list(Girls,[_,blue,_]),
+                in_list(Girls,[_,_,white]),
+                in_list(Girls,[_,_,green]),
+                in_list(Girls,[_,_,blue]),
+                in_list(Girls,[anya,_,_]),
+                in_list(Girls,[natasha,_,_]),
+                in_list(Girls,[valya,_,_]),
+                in_list(Girls,[natasha,_,green]),
+
+                not(in_list(Girls,[valya,white,white])),
+
+                write(Girls),!.
+
+
+
