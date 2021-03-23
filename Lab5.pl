@@ -137,6 +137,22 @@ pr_talant:- Talant = [_,_,_,_],
 
 		write(Talant), !.
 
+%Nomer 7
+pr_sorev:- Sorev = [_,_,_],
 
+                in_list(Sorev,[maikl,_,basteball]),
+                in_list(Sorev,[saymon,israel,_]),
+                in_list(Sorev,[richard,_,Sport]),
+                in_list(Sorev,[Name,australian,_]),
+                in_list(Sorev,[_,american,_]),
+                in_list(Sorev,[_,_,tennis]),
+                in_list(Sorev,[_,_,criket]),
+
+                not(in_list(Sorev,[saymon,_,tennis])),
+                not(in_list(Sorev,[maikl,american,_])),
+
+                write(Name),nl,
+                write(Sport),nl,
+                write(Sorev),!.
 
 
