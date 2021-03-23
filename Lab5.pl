@@ -96,5 +96,29 @@ pr_factory:-Factory = [_,_,_],
 
                 write(Factory),!.
 
+%Nomer 5
+pr_emkost:- Emkost = [_,_,_,_],
+
+                in_list(Emkost,[bottle,_]),
+                in_list(Emkost,[kyvshin,_]),
+                in_list(Emkost,[stakan,_]),
+                in_list(Emkost,[banka,_]),
+                in_list(Emkost,[_,moloko]),
+                in_list(Emkost,[_,limonad]),
+                in_list(Emkost,[_,kvas]),
+                in_list(Emkost,[_,voda]),
+
+                not(in_list(Emkost,[bottle,voda])),
+                not(in_list(Emkost,[bottle,moloko])),
+                sprava_next([kyvshin,_],[_,limonad],Emkost),
+                sprava_next([_,limonad],[_,kvas],Emkost),
+                not(in_list(Emkost,[banka,limonad])),
+                not(in_list(Emkost,[banka,voda])),
+                next_to([banka,_],[stakan,_],Emkost),
+                next_to([banka,_],[_,moloko],Emkost),
+
+                write(Emkost),!.
+
+
 
 
