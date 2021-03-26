@@ -14,4 +14,6 @@ sum_list_down([],Sum,Sum):-!.
 sum_list_down([H|T],Suma,Sum):-Suma1 is Suma+H,sum_list_down(T,Suma1,Sum).
 sumat_list_down(N,Sum):-read_list(N,X),sum_list_down(X,Sum).
 
-
+%Nomer 3
+sum_list_up([],0):-!.
+sum_list_up([H|T],Sum):-sum_list_up(T,Sum1),Sum is Sum1+H.
