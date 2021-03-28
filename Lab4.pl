@@ -17,3 +17,8 @@ sumat_list_down(N,Sum):-read_list(N,X),sum_list_down(X,Sum).
 %Nomer 3
 sum_list_up([],0):-!.
 sum_list_up([H|T],Sum):-sum_list_up(T,Sum1),Sum is Sum1+H.
+
+%Nomer 4
+list_el_numb(Spis,Elem,N):-list_el_numb(Spis,Elem,0,N).
+list_el_numb([H|_],H,N,N):-!.
+list_el_numb([_|T],Elem,Num,N):-Num1 is Num+1,list_el_numb(T,Elem,Num1,N).
