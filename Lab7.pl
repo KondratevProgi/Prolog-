@@ -60,3 +60,17 @@ regular_slov(Str,Slov):-regular_slov(Str,0,[],Slov).
 
 nomer3:- write("Vvedite stroky: "),read_stroka_neopr(S),spisok_slov(S,SSl),
         regular_slov(SSl,Slov),write("Regular slova: "),write_stroka(Slov).
+
+%Nomer 4
+last_3elem(Str,Str):- count_elem(Str,3),!.
+last_3elem([_|T],Str1):- last_3elem(T,Str1).
+
+elem1_kol(_,0,Str,Str) :- !.
+elem1_kol(Elem,N,SStr,Str):- N1 is N-1,append(SStr,[Elem],SStr1),
+          elem1_kol(Elem,N1,SStr1,Str).
+elem1_kol(Elem,N,Str):- elem1_kol(Elem,N,[],Str).
+
+nomer4:- write("Vvedite stroky: "),read_stroka_neopr(S),count_elem(S,Kol),
+        (Kol>5->([H1|[H2|[H3|T]]]=S,last_3elem(T,T3),
+        append([H1,H2,H3],T3,NStr));([H1|_]=S,
+        elem1_kol(H1,Kol,NStr))),write("Nova stroka: "),write_stroka(NStr).
