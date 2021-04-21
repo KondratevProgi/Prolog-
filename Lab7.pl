@@ -35,3 +35,28 @@ kol_slovnopro(Str,Kol):- kol_slovnopro(Str,0,Kol).
 nomer2 :- write("Vvedite stroky: "),read_stroka_neopr(S),write("Kolvo slov: "),
           kol_slovnopro(S,Kol),write(Kol).
 
+%Nomer 3
+slovo_noprobel(Str,Slov):-stroka_no1probel(Str,Str1sl),do1probel(Str1sl,Slov).
+
+spisok_slov(Str,SSl,SSl):-stroka_no1probel(Str,Str1sl),Str1sl=[],!.
+spisok_slov(Str1,SSl1,SSl) :-stroka_no1probel(Str1,Str1sl),do1probel(Str1sl,Slov),
+             append(Slov,StrSlov,Str1sl),append(SSl1,[Slov],SSl11),
+             spisok_slov(StrSlov,SSl11,SSl).
+spisok_slov(Str1,SSl):-spisok_slov(Str1,[],SSl).
+
+spis([],[]):- !.
+spis([H|T1],[H|T2]):-spis(T1,T2).
+
+kol_slovpovtor([],_,Kol,Kol):- !.
+kol_slovpovtor([H|T],Elem,KKol,Kol):- (H=Elem->KKol1 is KKol + 1;
+             KKol1 is KKol),kol_slovpovtor(T,Elem,KKol1,Kol).
+kol_slovpovtor(Str,Elem,Kol):-kol_slovpovtor(Str,Elem,0,Kol).
+
+regular_slov([],_,Slov,Slov):- !.
+regular_slov([H|T],Kol,SSlov,Slov):-kol_slovpovtor([H|T],H,Kol1),
+            (Kol1>Kol->(SSlov1=H,Kol2 = Kol1); (SSlov1 = SSlov,Kol2 =Kol)),
+            regular_slov(T,Kol2,SSlov1,Slov).
+regular_slov(Str,Slov):-regular_slov(Str,0,[],Slov).
+
+nomer3:- write("Vvedite stroky: "),read_stroka_neopr(S),spisok_slov(S,SSl),
+        regular_slov(SSl,Slov),write("Regular slova: "),write_stroka(Slov).
