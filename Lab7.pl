@@ -74,3 +74,24 @@ nomer4:- write("Vvedite stroky: "),read_stroka_neopr(S),count_elem(S,Kol),
         (Kol>5->([H1|[H2|[H3|T]]]=S,last_3elem(T,T3),
         append([H1,H2,H3],T3,NStr));([H1|_]=S,
         elem1_kol(H1,Kol,NStr))),write("Nova stroka: "),write_stroka(NStr).
+
+%Nomer 5
+nomer_elem([H],Elem,N1,N):- ((H=Elem)->N is N1+1; write("Nety")),!.
+nomer_elem([H|T],Elem,N1,N):- N11 is N1+1,((Elem=H)->N is N11;nomer_elem(T,Elem,N11,N)).
+nomer_elem([H|T],Elem,N):-nomer_elem([H|T],Elem,0,N).
+
+elem_nomer_str([],_,_,_):- write("Nety"),!.
+elem_nomer_str([_],N1,N,_):-N11 is N1+1,N11<N,write("Nety"),!.
+elem_nomer_str([H|T],N1,N,Elem):- N11 is N1+1,((N11 is N)->Elem is H;elem_nomer_str(T,N11,N,Elem)).
+elem_nomer_str([H|T],N,Elem):- elem_nomer_str([H|T],0,N,Elem).
+
+sovpad_elem([],_,_,_,Str,Str):- !.
+sovpad_elem([H|T],Elem,N1,Kol,Str1,NStr):-N11 is N1+1,
+           (Elem=H->append(Str1,[N11],Str11);append(Str1,[],Str11)),
+            sovpad_elem(T,Elem,N11,Kol,Str11,NStr).
+sovpad_elem(Str,Elem,NStr):- count_elem(Str,Kol),sovpad_elem(Str,Elem,0,Kol,[],NStr).
+
+nomer5:- write("Vvedite stroky: "),read_stroka_neopr(S),count_elem(S,Kol),
+         elem_nomer_str(S,Kol,Elem),sovpad_elem(S,Elem,N),
+         write(Kol),write(" position:  "),write_stroka([Elem]),nl,
+         write("Nomera elem: "),write(N).
