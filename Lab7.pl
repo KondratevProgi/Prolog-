@@ -222,3 +222,30 @@ tolko_abc([H|T]):-((H=97|H=98|H=99)->tolko_abc(T);fail).
 
 nomer15:- write("Vvedite stroky: "),read_stroka_neopr(S),((tolko_abc(S))->
           write("Tolko a,b,c");write("Ne tolko a,b,c")).
+
+%Nomer 16
+word_na_letter([H1,H2,H3],SStr,Str):- append(SStr,[H1,H2,H3],Str),!.
+word_na_letter([H1,H2],SStr,Str):- append(SStr,[H1,H2],Str),!.
+word_na_letter([H1],SStr,Str):- append(SStr,[H1],Str),!.
+word_na_letter([],Str,Str):- !.
+word_na_letter([H1|[H2|[H3|[H4|T]]]],SStr,Str):-((H1=119,H2=111,H3=114,H4=100)->
+              (append(SStr,[108,101,116,116,101,114],SStr1),
+               word_na_letter(T,SStr1,Str));(append(SStr,[H1],SStr1),
+               word_na_letter([H2|[H3|[H4|T]]],SStr1,Str))).
+word_na_letter(Str,NStr):- word_na_letter(Str,[],NStr).
+
+nomer16:- write("Vvedite stroky: "),read_stroka_neopr(S),word_na_letter(S,NS),
+          write("Novi stroka: "),write_stroka(NS).
+
+%Nomer 17
+udal_x_za_abc([H1,H2,H3],SStr,Str):- append(SStr,[H1,H2,H3],Str),!.
+udal_x_za_abc([H1,H2],SStr,Str):- append(SStr,[H1,H2],Str),!.
+udal_x_za_abc([H1],SStr,Str):- append(SStr,[H1],Str),!.
+udal_x_za_abc([],Str,Str):- !.
+udal_x_za_abc([H1|[H2|[H3|[H4|T]]]],SStr,Str):-((H1=120,H2=97,H3=98,H4=99)->
+             (append(SStr,[H2,H3,H4],SStr1),udal_x_za_abc(T,SStr1,Str));
+             (append(SStr,[H1],SStr1),udal_x_za_abc([H2|[H3|[H4|T]]],SStr1,Str))).
+udal_x_za_abc(Str,NStr):- udal_x_za_abc(Str,[],NStr).
+
+nomer17:- write("Vvedite stroky: "),read_stroka_neopr(S),udal_x_za_abc(S,NS),
+          write("Novi stroka: "),write_stroka(NS).
