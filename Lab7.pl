@@ -277,3 +277,11 @@ nomer19:- write("Vvedite stroky: "),read_stroka_neopr(S),kol_aba(S,Kol),
           write("Kol aba: "),write(Kol).
 
 %Nomer 20
+udal_probel([H],SStr,Str) :- append(SStr,H,Str),!.
+udal_probel([H|T],SStr,Str):-append(H,[32],H1),append(SStr,H1,SStr1),
+            udal_probel(T,SStr1,Str).
+udal_probel(Str,Spis):- udal_probel(Str,[],Spis).
+
+nomer20:- write("Vvedite stroky: "),read_stroka_neopr(S),spisok_slov(S,Slov),
+          udal_probel(Slov,NS),write("Novi stroka: "),write_stroka(NS).
+
