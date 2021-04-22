@@ -196,3 +196,13 @@ stroka_vozrast(Str,NStr):- stroka_vozrast(Str,[],NStr).
 nomer12:- write("Vvedite stroky: "),read_stroka_neopr(S),nl,write("Original: "),nl,
           spisok_3elem(S,Slov),write_spstroka(Slov),nl,write("Izmenen: "),nl,
           menaem_mid_elem(Slov,Slov1),write_spstroka(Slov1).
+
+%Nomer 13
+chet_elem([H1],SStr,Str):- append(SStr,[H1],Str),!.
+chet_elem([],Str,Str):- !.
+chet_elem([H1|[H2|T]],SStr,Str):- ((H2=97|H2=98)->append(SStr,[H1,99],SStr1);
+   append(SStr,[H1,97],SStr1)),chet_elem(T,SStr1,Str).
+chet_elem(Str,NStr):- chet_elem(Str,[],NStr).
+
+nomer13:- write("Vvedite stroky: "),read_stroka_neopr(S),
+          chet_elem(S,NS),write_stroka(NS).
