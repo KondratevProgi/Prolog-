@@ -285,3 +285,16 @@ udal_probel(Str,Spis):- udal_probel(Str,[],Spis).
 nomer20:- write("Vvedite stroky: "),read_stroka_neopr(S),spisok_slov(S,Slov),
           udal_probel(Slov,NS),write("Novi stroka: "),write_stroka(NS).
 
+%Nomer 21
+razdel_slov([],_,Slov,SStr,Str):- append(SStr,[Slov],Str),!.
+razdel_slov(SubStr,[],_,SStr,Str):- append(SStr,[SubStr],Str),!.
+razdel_slov([H1|T1],[H2|T2],Slov,SStr,Str):-(H1=H2->
+           (append(SStr,[Slov],SStr1),Flag=0,Slov1=[]);
+           (append(Slov,[H1],Slov1),SStr1=SStr,Flag=1)),(Flag = 0 ->
+            razdel_slov(T1,T2,Slov1,SStr1,Str);
+            razdel_slov(T1,[H2|T2],Slov1,SStr1,Str)).
+razdel_slov(S1,S2,Str):- razdel_slov(S1,S2,[],[],Str).
+
+nomer21:- write("Vvedite stroky 1: "),read_stroka_neopr(S1),
+          write("Vvedite stroky 2: "),read_stroka_neopr(S2),
+          razdel_slov(S1, S2, List),write_spstroka(List).
