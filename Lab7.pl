@@ -249,3 +249,18 @@ udal_x_za_abc(Str,NStr):- udal_x_za_abc(Str,[],NStr).
 
 nomer17:- write("Vvedite stroky: "),read_stroka_neopr(S),udal_x_za_abc(S,NS),
           write("Novi stroka: "),write_stroka(NS).
+
+%Nomer 18
+udal_abc_za_digit([H1,H2,H3],SStr,Str):- append(SStr,[H1,H2,H3],Str),!.
+udal_abc_za_digit([H1,H2],SStr,Str):- append(SStr,[H1,H2],Str),!.
+udal_abc_za_digit([H1],SStr,Str):- append(SStr,[H1],Str),!.
+udal_abc_za_digit([],Str,Str):- !.
+udal_abc_za_digit([H1|[H2|[H3|[H4|T]]]],SStr,Str):-
+                 ((H1=97,H2=98,H3=99,H4>=48,H4=<57)->
+                 (append(SStr,[H4],SStr1),udal_abc_za_digit(T,SStr1,Str));
+                 (append(SStr,[H1],SStr1),udal_abc_za_digit([H2|[H3|[H4|T]]],
+                  SStr1,Str))).
+udal_abc_za_digit(Str,NStr):- udal_abc_za_digit(Str,[],NStr).
+
+nomer18:- write("Vvedite stroky: "),read_stroka_neopr(S),udal_abc_za_digit(S,NS),
+          write("Novi stroka: "),write_stroka(NS).
