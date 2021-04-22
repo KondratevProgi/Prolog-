@@ -140,7 +140,6 @@ nomer9:- write("Vvedite stroky 1: "),read_stroka_neopr(S1),
          write("Odinakovi"))).
 
 %Nomer 10
-% меняем все 'abc' на 'www'
 abc_na_www([H1,H2],SStr,Str):- append(SStr,[H1,H2],Str),!.
 abc_na_www([H1],SStr,Str):- append(SStr,[H1],Str),!.
 abc_na_www([],Str,Str):- !.
@@ -151,4 +150,18 @@ abc_na_www(Str,NStr):- abc_na_www(Str,[],NStr).
 
 nomer10:- write("Vvedite stroky: "),read_stroka_neopr(S),[H1|[H2|[H3|_]]]=S,
         ((H1=97,H2=98,H3=99)->abc_na_www(S,NS);append(S,[122,122,122],NS)),
+          write("Novi stroka: "),write_stroka(NS).
+
+%Nomer 11
+elem0_dlina(_,N,N,Str,Str):- !.
+elem0_dlina(Elem,NN,N,SStr,Str):-NN1 is NN+1,append(SStr,[Elem],SStr1),
+            elem0_dlina(Elem,NN1,N,SStr1,Str).
+
+spisok_doN(_,N,N,Str,Str):- !.
+spisok_doN([H|T],NN,N,SStr,NStr):- append(SStr,[H],SStr1),NN1 is  NN+1,
+           spisok_doN(T,NN1,N,SStr1,NStr).
+spisok_doN(Str,N,NStr):- spisok_doN(Str,0,N,[],NStr).
+
+nomer11:- write("Vvedite stroky: "),read_stroka_neopr(S),count_elem(S,Kol),
+         (Kol>10->spisok_doN(S,6,NS);elem0_dlina(111,Kol, 12, S, NS)),
           write("Novi stroka: "),write_stroka(NS).
