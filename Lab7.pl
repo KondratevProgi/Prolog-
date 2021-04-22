@@ -116,9 +116,15 @@ kol_posle0([_|[H2|T]],KKol,Kol):-(H2=48->KKol1 is KKol+1; KKol1 is KKol),
 kol_posle0(Str,Kol):- kol_posle0(Str,0,Kol).
 
 nomer7:- write("Vvedite stroky: "),read_stroka_neopr(S),plus_minus(S,Kol),
-  write("Count [+] and [-] => "),
-  write(Kol), nl,
- kol_posle0(S, Kol0),
-  write("Count els, after which [0] => "),
-  write(Kol0).
+         write("Kol plus minus: "),write(Kol),nl,kol_posle0(S, Kol0),
+         write("Kol posle 0: "),write(Kol0).
 
+%Nomer8
+% есть ли элемент в списке
+in_ls([H|_],H):- !.
+in_ls([_|T],Elem):- in_ls(T,Elem).
+
+nomer8:- write("Vvedite stroky: "),read_stroka_neopr(S),
+        (not((in_ls(S,119),in_ls(S,120)))->write("nety");
+        (nomer_elem(S,119,NX),nomer_elem(S,120,NW),
+        (NX<NW ->write("pervak X");write("pervak W")))).
