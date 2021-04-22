@@ -215,3 +215,10 @@ kol_digit(Str,Kol):- kol_digit(Str,0,Kol).
 
 nomer14:- write("Vvedite stroky: "),read_stroka_neopr(S),kol_digit(S,Kol),
           write("Kol cifr: "),write(Kol).
+
+%Nomer 15
+tolko_abc([]):- !.
+tolko_abc([H|T]):-((H=97|H=98|H=99)->tolko_abc(T);fail).
+
+nomer15:- write("Vvedite stroky: "),read_stroka_neopr(S),((tolko_abc(S))->
+          write("Tolko a,b,c");write("Ne tolko a,b,c")).
