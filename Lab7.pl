@@ -298,3 +298,10 @@ razdel_slov(S1,S2,Str):- razdel_slov(S1,S2,[],[],Str).
 nomer21:- write("Vvedite stroky 1: "),read_stroka_neopr(S1),
           write("Vvedite stroky 2: "),read_stroka_neopr(S2),
           razdel_slov(S1, S2, List),write_spstroka(List).
+
+%Nomer 22
+nomer22:- write("Vvedite stroky: "),read_stroka_neopr(S),count_elem(S,Kol),
+        ((0 is Kol mod 2)->(Flag=0);(MidN is (1+Kol)/2,elem_nomer_str(S,MidN,ElemMid),
+          Flag=1)),elem_nomer_str(S,1,Left),elem_nomer_str(S,Kol,Right),(Flag=1 ->
+          NS=[Left,Right,ElemMid];NS=[Left,Right]),write("Novi stroka: "),
+          write_stroka(NS).
