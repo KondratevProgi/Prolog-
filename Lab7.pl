@@ -95,3 +95,12 @@ nomer5:- write("Vvedite stroky: "),read_stroka_neopr(S),count_elem(S,Kol),
          elem_nomer_str(S,Kol,Elem),sovpad_elem(S,Elem,N),
          write(Kol),write(" position:  "),write_stroka([Elem]),nl,
          write("Nomera elem: "),write(N).
+
+%Nomer 6
+krat3(_,N,Kol,Str,Str):- N>Kol,!.
+krat3(Str,N,Kol,SStr,NStr):-N1 is N+3,elem_nomer_str(Str,N,Elem),
+             append(SStr,[Elem],SStr1),krat3(Str,N1,Kol,SStr1,NStr).
+krat3(Str,NStr):-count_elem(Str,Kol),krat3(Str,3,Kol,[],NStr).
+
+nomer6:- write("Vvedite stroky: "),read_stroka_neopr(S),krat3(S,Mod3),
+         write("Chisla krat 3: "),write_stroka(Mod3).
