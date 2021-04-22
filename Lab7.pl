@@ -264,3 +264,16 @@ udal_abc_za_digit(Str,NStr):- udal_abc_za_digit(Str,[],NStr).
 
 nomer18:- write("Vvedite stroky: "),read_stroka_neopr(S),udal_abc_za_digit(S,NS),
           write("Novi stroka: "),write_stroka(NS).
+
+%Nomer 19
+kol_aba([_,_],Kol,Kol):- !.
+kol_aba([_],Kol,Kol):- !.
+kol_aba([],Kol,Kol):- !.
+kol_aba([H1|[H2|[H3|T]]],KKol,Kol):-((H1=97,H2=98,H3=97)->KKol1 is KKol+1;
+        KKol1 is KKol),kol_aba([H2|[H3|T]],KKol1,Kol).
+kol_aba(Str,Kol):- kol_aba(Str,0,Kol).
+
+nomer19:- write("Vvedite stroky: "),read_stroka_neopr(S),kol_aba(S,Kol),
+          write("Kol aba: "),write(Kol).
+
+%Nomer 20
