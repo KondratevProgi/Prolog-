@@ -206,3 +206,12 @@ chet_elem(Str,NStr):- chet_elem(Str,[],NStr).
 
 nomer13:- write("Vvedite stroky: "),read_stroka_neopr(S),
           chet_elem(S,NS),write_stroka(NS).
+
+%Nomer 14
+kol_digit([],Kol,Kol):- !.
+kol_digit([H|T],KKol,Kol):-((H>=48,H=<57)->KKol1 is KKol+1;KKol1 is KKol),
+kol_digit(T,KKol1,Kol).
+kol_digit(Str,Kol):- kol_digit(Str,0,Kol).
+
+nomer14:- write("Vvedite stroky: "),read_stroka_neopr(S),kol_digit(S,Kol),
+          write("Kol cifr: "),write(Kol).
