@@ -138,3 +138,17 @@ nomer9:- write("Vvedite stroky 1: "),read_stroka_neopr(S1),
         (Kol1>Kol2->(Kol12 is Kol1-Kol2,write_stroki(S1,Kol12));
         (Kol2>Kol1->(Kol12 is Kol2-Kol1,write_stroki(S2,Kol12));
          write("Odinakovi"))).
+
+%Nomer 10
+% меняем все 'abc' на 'www'
+abc_na_www([H1,H2],SStr,Str):- append(SStr,[H1,H2],Str),!.
+abc_na_www([H1],SStr,Str):- append(SStr,[H1],Str),!.
+abc_na_www([],Str,Str):- !.
+abc_na_www([H1|[H2|[H3|T]]],SStr,Str):-((H1=97,H2=98,H3=99)->
+          (append(SStr,[119,119,119],SStr1),abc_na_www(T,SStr1,Str));
+          (append(SStr,[H1],SStr1),abc_na_www([H2|[H3|T]],SStr1,Str))).
+abc_na_www(Str,NStr):- abc_na_www(Str,[],NStr).
+
+nomer10:- write("Vvedite stroky: "),read_stroka_neopr(S),[H1|[H2|[H3|_]]]=S,
+        ((H1=97,H2=98,H3=99)->abc_na_www(S,NS);append(S,[122,122,122],NS)),
+          write("Novi stroka: "),write_stroka(NS).
