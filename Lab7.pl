@@ -165,3 +165,34 @@ spisok_doN(Str,N,NStr):- spisok_doN(Str,0,N,[],NStr).
 nomer11:- write("Vvedite stroky: "),read_stroka_neopr(S),count_elem(S,Kol),
          (Kol>10->spisok_doN(S,6,NS);elem0_dlina(111,Kol, 12, S, NS)),
           write("Novi stroka: "),write_stroka(NS).
+
+%Nomer 12
+spisok_3elem([_,_],Str,Str):- !.
+spisok_3elem([_],Str,Str):- !.
+spisok_3elem([],Str,Str):- !.
+spisok_3elem(Str,SSlov,Slov):- spisok_doN(Str,3,DoStr),append(DoStr,PosleStr,Str),
+         append(SSlov,[DoStr],SSlov1),spisok_3elem(PosleStr,SSlov1,Slov).
+spisok_3elem(Str,Slov):- spisok_3elem(Str,[],Slov).
+
+write_spstroka([]):- !.
+write_spstroka([H|T]):- write_stroka(H),nl,write_spstroka(T).
+
+max_3elem([H1,H2,H3],H1):- H1>=H2,H1>=H3,!.
+max_3elem([_,H2,H3],H2):- H2>=H3,!.
+max_3elem([_,_,H3],H3):- !.
+
+menaem_mid_elem([],Str,Str):- !.
+menaem_mid_elem([H|T],SStr,Str):- max_3elem(H,Max), Max1 is Max+1,[H1,_,H2]=H,
+           append(SStr,[[H1,Max1,H2]],SStr1),menaem_mid_elem(T,SStr1,Str).
+menaem_mid_elem(Spis,Str):- menaem_mid_elem(Spis,[],Str).
+
+check_povozrast([H1,H2,H3]):- H1=<H2,H2=<H3,!.
+
+stroka_vozrast([],Str,Str):- !.
+stroka_vozrast([H|T],SStr,Str):-(check_povozrast(H)->append(SStr,[H],SStr1);
+                 SStr1=SStr),stroka_vozrast(T,SStr1,Str).
+stroka_vozrast(Str,NStr):- stroka_vozrast(Str,[],NStr).
+
+nomer12:- write("Vvedite stroky: "),read_stroka_neopr(S),nl,write("Original: "),nl,
+          spisok_3elem(S,Slov),write_spstroka(Slov),nl,write("Izmenen: "),nl,
+          menaem_mid_elem(Slov,Slov1),write_spstroka(Slov1).
