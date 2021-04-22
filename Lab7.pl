@@ -119,8 +119,7 @@ nomer7:- write("Vvedite stroky: "),read_stroka_neopr(S),plus_minus(S,Kol),
          write("Kol plus minus: "),write(Kol),nl,kol_posle0(S, Kol0),
          write("Kol posle 0: "),write(Kol0).
 
-%Nomer8
-% есть ли элемент в списке
+%Nomer 8
 in_ls([H|_],H):- !.
 in_ls([_|T],Elem):- in_ls(T,Elem).
 
@@ -128,3 +127,14 @@ nomer8:- write("Vvedite stroky: "),read_stroka_neopr(S),
         (not((in_ls(S,119),in_ls(S,120)))->write("nety");
         (nomer_elem(S,119,NX),nomer_elem(S,120,NW),
         (NX<NW ->write("pervak X");write("pervak W")))).
+
+%Nomer 9
+write_stroki(_,0):- !.
+write_stroki(Str,N):- N1 is N-1,write_stroka(Str),write(" "),write_stroki(Str,N1).
+
+nomer9:- write("Vvedite stroky 1: "),read_stroka_neopr(S1),
+         write("Vvedite stroky 2: "),read_stroka_neopr(S2),
+         count_elem(S1,Kol1),count_elem(S2,Kol2),
+        (Kol1>Kol2->(Kol12 is Kol1-Kol2,write_stroki(S1,Kol12));
+        (Kol2>Kol1->(Kol12 is Kol2-Kol1,write_stroki(S2,Kol12));
+         write("Odinakovi"))).
