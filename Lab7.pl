@@ -104,3 +104,21 @@ krat3(Str,NStr):-count_elem(Str,Kol),krat3(Str,3,Kol,[],NStr).
 
 nomer6:- write("Vvedite stroky: "),read_stroka_neopr(S),krat3(S,Mod3),
          write("Chisla krat 3: "),write_stroka(Mod3).
+
+%Nomer 7
+plus_minus([],Kol,Kol):- !.
+plus_minus([H|T],KKol,Kol):-((H=43|H=45)->KKol1 is KKol+1;KKol1 is KKol),plus_minus(T,KKol1,Kol).
+plus_minus(Str,Kol):- plus_minus(Str,0,Kol).
+
+kol_posle0([_],Kol,Kol):- !.
+kol_posle0([_|[H2|T]],KKol,Kol):-(H2=48->KKol1 is KKol+1; KKol1 is KKol),
+           kol_posle0([H2|T],KKol1,Kol).
+kol_posle0(Str,Kol):- kol_posle0(Str,0,Kol).
+
+nomer7:- write("Vvedite stroky: "),read_stroka_neopr(S),plus_minus(S,Kol),
+  write("Count [+] and [-] => "),
+  write(Kol), nl,
+ kol_posle0(S, Kol0),
+  write("Count els, after which [0] => "),
+  write(Kol0).
+
