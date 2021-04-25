@@ -42,3 +42,16 @@ podmnog(Pod,[_|Mn]):- podmnog(Pod,Mn).
 podmn:- read_stroka(A,_),podmnog(B,A),write_stroka(B),nl,fail.
 
 %Zadanie 5
+sochett([],0, _):- !.
+sochett([H|T],K,[H|T1]):- K1 is K-1,sochett(T,K1,T1).
+sochett(T,K,[_|T1]):- sochett(T,K,T1).
+
+sochet:- read_stroka(A,_),read(K),sochett(B,K,A),write_stroka(B),nl,fail.
+
+%Zadanie 6
+sochet_p([],0,_):- !.
+sochet_p([H|T],K,[H|T1]):-K1 is K-1,sochet_p(T,K1,[H|T1]).
+sochet_p(T,K,[_|T1]):- sochet_p(T,K,T1).
+
+sochet_povtor:- read_stroka(A,_),read(K),sochet_p(B, K, A),
+                write_stroka(B),nl,fail.
