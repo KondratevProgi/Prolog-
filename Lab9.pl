@@ -148,4 +148,18 @@ slov6(Spis):- slov6(Spis,0,[]).
 
 nomer6:- read_stroka(A,_),slov6(A).
 
+%Nomer 7
+slov7(_,9,Slov):- unic_spis(Slov,Unic),povtor2(Slov,Unic,Elem),
+      rovn(Slov,Elem,SlovNoElem),unic_spis(SlovNoElem,UnicElem),
+      povtor2(SlovNoElem,UnicElem,Elem1),rovn(SlovNoElem,Elem1,SlovNoElem1),
+      unic_spis(SlovNoElem1,UnicElem1),povtor2_2(SlovNoElem1,UnicElem1,Elem2),
+      rovn(SlovNoElem1,Elem2,SlovNoElem2),unic_spis(SlovNoElem2,SlovNoElem2),
+      write_stroka(Slov),nl,!,fail.
+slov7(_,9,_):- !,fail.
+slov7(Spis,Raz,Slov):-spisok(Spis,Elem),append(Slov,[Elem],Slov1),
+      Raz1 is Raz+1,slov7(Spis,Raz1,Slov1).
+slov7(Spis):- slov7(Spis,0,[]).
+
+nomer7:- read_stroka(A,_),slov7(A).
+
 
