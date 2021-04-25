@@ -119,3 +119,16 @@ slov4(Spis,Raz,SSlov):- spisok(Spis,Elem),append(SSlov,[Elem],SSlov1),
 slov4(Spis):- slov4(Spis,0,[]).
 
 nomer4:- read_stroka(A,_),slov4(A).
+
+%Nomer 5
+slov5(_,6,Slov):- unic_spis(Slov,Unic),povtor2(Slov,Unic,Elem),
+      rovn(Slov,Elem,SlovNoElem),unic_spis(SlovNoElem,UnicElem),
+      povtor2(SlovNoElem,UnicElem,Elem1),rovn(SlovNoElem,Elem1,SlovNoElem1),
+      unic_spis(SlovNoElem1,SlovNoElem1),write_stroka(Slov),nl,!,fail.
+slov5(_,6,_):- !,fail.
+slov5(Spis,Raz,Slov):- spisok(Spis,Elem),append(Slov,[Elem],Slov1),
+      Raz1 is Raz+1,slov5(Spis,Raz1,Slov1).
+slov5(Spis):- slov5(Spis,0,[]).
+
+nomer5:- read_stroka(A,_),slov5(A).
+
