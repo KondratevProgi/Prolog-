@@ -19,3 +19,12 @@ write_stroka([H|T]):- put(H),write_stroka(T).
 
 razm_povtor:- read_stroka(A,_),read(K),razmesh(A,K,[]).
 
+%Zadanie 2
+spisok1([Elem|T],Elem,T).
+spisok1([H|T],Elem,[H|T]):- spisok1(T,Elem,T).
+
+peres([],Perem1):- write_stroka(Perem1),nl,!,fail.
+peres(A,Perem):- spisok1(A,Elem,A1),peres(A1,[Elem|Perem]).
+
+perestan:- read_stroka(A,_),peres(A,[]).
+
