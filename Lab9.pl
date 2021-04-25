@@ -132,3 +132,20 @@ slov5(Spis):- slov5(Spis,0,[]).
 
 nomer5:- read_stroka(A,_),slov5(A).
 
+%Nomer 6
+povtor2_2(_,[],_):- !,fail.
+povtor2_2(Spis,[H|T],Elem):- kol_spis(Spis,H,Kol),(Kol=3->
+         (Elem=H,true);povtor2_2(Spis,T,Elem)).
+
+slov6(_,7,Slov):- unic_spis(Slov,Unic),povtor2(Slov,Unic,Elem),
+      rovn(Slov,Elem,SlovNoElem),unic_spis(SlovNoElem,UnicNoElem),
+      povtor2_2(SlovNoElem,UnicNoElem,Elem1),rovn(SlovNoElem,Elem1,SlovNoElem1),
+      unic_spis(SlovNoElem1,SlovNoElem1),write_stroka(Slov),nl,!,fail.
+slov6(_,7,_):- !,fail.
+slov6(Spis,Raz,Slov):- spisok(Spis,Elem),append(Slov,[Elem],Slov1),
+      Raz1 is Raz+1,slov6(Spis,Raz1,Slov1).
+slov6(Spis):- slov6(Spis,0,[]).
+
+nomer6:- read_stroka(A,_),slov6(A).
+
+
