@@ -12,7 +12,7 @@ stroka(X,A,B,N,Kol):-Kol1 is Kol+1,append(B,[X],B1),get0(X1),
                      stroka(X1,A,B1,N,Kol1).
 
 razmesh(_,0,Perem1):- write_stroka(Perem1), nl, !, fail.
-razmesh(A,N,Perem):- in_list(A,Elem),N1 is N-1,razmesh(A,N1,[Elem|Perem]).
+razmesh(A,N,Perem):- spisok(A,Elem),N1 is N-1,razmesh(A,N1,[Elem|Perem]).
 
 write_stroka([]):- !.
 write_stroka([H|T]):- put(H),write_stroka(T).
@@ -20,11 +20,16 @@ write_stroka([H|T]):- put(H),write_stroka(T).
 razm_povtor:- read_stroka(A,_),read(K),razmesh(A,K,[]).
 
 %Zadanie 2
-spisok1([Elem|T],Elem,T).
-spisok1([H|T],Elem,[H|T]):- spisok1(T,Elem,T).
+spisokt([Elem|T],Elem,T).
+spisokt([H|T],Elem,[H|T]):- spisokt(T,Elem,T).
 
 peres([],Perem1):- write_stroka(Perem1),nl,!,fail.
 peres(A,Perem):- spisok1(A,Elem,A1),peres(A1,[Elem|Perem]).
 
 perestan:- read_stroka(A,_),peres(A,[]).
 
+%Zadanie 3
+razmes(_,0,Perem1):- write_stroka(Perem1),nl,!,fail.
+razmes(A,N,Perem):- spisokt(A,Elem,A1),N1 is N-1,razmes(A1,N1,[Elem|Perem]).
+
+razm:- read_stroka(A,_),read(K),razmes(A,K,[]).
