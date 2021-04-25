@@ -24,7 +24,7 @@ spisokt([Elem|T],Elem,T).
 spisokt([H|T],Elem,[H|T]):- spisokt(T,Elem,T).
 
 peres([],Perem1):- write_stroka(Perem1),nl,!,fail.
-peres(A,Perem):- spisok1(A,Elem,A1),peres(A1,[Elem|Perem]).
+peres(A,Perem):- spisokt(A,Elem,A1),peres(A1,[Elem|Perem]).
 
 perestan:- read_stroka(A,_),peres(A,[]).
 
@@ -33,3 +33,12 @@ razmes(_,0,Perem1):- write_stroka(Perem1),nl,!,fail.
 razmes(A,N,Perem):- spisokt(A,Elem,A1),N1 is N-1,razmes(A1,N1,[Elem|Perem]).
 
 razm:- read_stroka(A,_),read(K),razmes(A,K,[]).
+
+%Zadanie 4
+podmnog([],[]).
+podmnog([H|Pod],[H|Mn]):- podmnog(Pod,Mn).
+podmnog(Pod,[_|Mn]):- podmnog(Pod,Mn).
+
+podmn:- read_stroka(A,_),podmnog(B,A),write_stroka(B),nl,fail.
+
+%Zadanie 5
