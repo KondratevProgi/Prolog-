@@ -99,3 +99,23 @@ slov3(Spis,KKol,Raz,SSlov):- spisok(Spis,Elem),(Elem=97->KKol1 is KKol+1;
 slov3(Spis):- slov3(Spis,0,0,[]).
 
 nomer3:- read_stroka(A,_),slov3(A).
+
+%Nomer 4
+kol_spis([],_,Kol,Kol):- !.
+kol_spis([H|T],Elem,KKol,Kol):- (H=Elem->KKol1 is KKol+1;KKol1 is KKol),
+         kol_spis(T,Elem,KKol1,Kol).
+kol_spis(Spis,Elem,Kol):- kol_spis(Spis,Elem,0,Kol).
+
+povtor2(_,[],_):- !,fail.
+povtor2(Spis,[H|T],Elem):- kol_spis(Spis,H,Kol),(Kol=2->(Elem=H,true);
+        povtor2(Spis,T,Elem)).
+
+slov4(_,5,Slov):- unic_spis(Slov,Unic),povtor2(Slov,Unic,Elem),
+      rovn(Slov,Elem,SlovNoElem),unic_spis(SlovNoElem,SlovNoElem),
+      write_stroka(Slov),nl,!,fail.
+slov4(_,5,_):- !,fail.
+slov4(Spis,Raz,SSlov):- spisok(Spis,Elem),append(SSlov,[Elem],SSlov1),
+      Raz1 is Raz+1,slov4(Spis,Raz1,SSlov1).
+slov4(Spis):- slov4(Spis,0,[]).
+
+nomer4:- read_stroka(A,_),slov4(A).
