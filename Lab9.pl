@@ -55,3 +55,47 @@ sochet_p(T,K,[_|T1]):- sochet_p(T,K,T1).
 
 sochet_povtor:- read_stroka(A,_),read(K),sochet_p(B, K, A),
                 write_stroka(B),nl,fail.
+
+
+%Nomer 2
+slovo5(_,Kol,5,Slov):- Kol= 2,write_stroka(Slov),nl,!,fail.
+slovo5(_,_,5,_):- !,fail.
+slovo5(Spis,KKol,RRazm,SSlov):-spisok(Spis,Elem),
+        (Elem=97->KKol1 is KKol+1;KKol1 is KKol),append(SSlov,[Elem],SSlov1),
+         RRazm1 is RRazm+1,slovo5(Spis,KKol1,RRazm1,SSlov1).
+slovo5(Spis):- slovo5(Spis,0,0,[]).
+
+nomer2:- read_stroka(A,_),slovo5(A).
+
+%Nomer 3
+
+nomer_elem([H],Elem,NN,N):- ((H=Elem)->N is NN+1), !.
+nomer_elem([H|T],Elem,NN,N):- NN1 is NN+1,((Elem=H)->N is NN1;
+          nomer_elem(T,Elem,NN1,N)).
+nomer_elem([H|T],Elem,N):- nomer_elem([H|T],Elem,0,N).
+
+spis3([H|_],H):- !.
+spis3([_|T],Elem):- spis3(T,Elem).
+
+r_elem([_|T],Spis,N,N,NSpis):- append(Spis,T,NSpis),!.
+r_elem([H|T],Spis,NN,N,NSpis):- append(Spis,[H],Spis1),NN1 is NN+1,
+      r_elem(T,Spis1,NN1,N,NSpis).
+r_elem(SSpis,N,NSpis):- r_elem(SSpis,[],1,N,NSpis).
+
+rovn(Spis,Elem,Spis):- not(spis3(Spis,Elem)),!.
+rovn(Spis,Elem,NSpis):- nomer_elem(Spis,Elem,N),r_elem(Spis,N,Spis1),
+                        rovn(Spis1,Elem,NSpis).
+
+unic_spis([],[]):- !.
+unic_spis([H|T],Spis):- rovn(T,H,RSpis),unic_spis(RSpis,Spis1),
+                        append([H],Spis1,Spis).
+
+slov3(_,Kol,5,Slov):- Kol=2,rovn(Slov,97,SlovNo),
+      unic_spis(SlovNo,SlovNo),write_stroka(Slov),nl,!,fail.
+slov3(_,_,5,_):- !,fail.
+slov3(Spis,KKol,Raz,SSlov):- spisok(Spis,Elem),(Elem=97->KKol1 is KKol+1;
+      KKol1 is KKol),append(SSlov,[Elem],SSlov1),Raz1 is Raz+1,
+      slov3(Spis,KKol1,Raz1,SSlov1).
+slov3(Spis):- slov3(Spis,0,0,[]).
+
+nomer3:- read_stroka(A,_),slov3(A).
