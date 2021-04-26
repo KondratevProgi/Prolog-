@@ -171,3 +171,14 @@ slov8(Spis,KKol,Raz,Slov):- spisok(Spis,Elem),(Elem=97->KKol1 is KKol+1;
 slov8(Spis):- slov8(Spis,0,0,[]).
 
 nomer8:- read_stroka(A,_),slov8(A).
+
+%Nomer 9
+slov9(_,Kol,7,Slov):- Kol>2,write_stroka(Slov),nl,!,fail.
+slov9(_,_,7,_):- !,fail.
+slov9(Spis,KKol,Raz,Slov):- spisok(Spis,Elem),(Elem=97->KKol1 is KKol+1;
+      KKol1 is KKol),append(Slov,[Elem],Slov1),Raz1 is Raz+1,
+      slov8(Spis,KKol1,Raz1,Slov1).
+slov9(Spis):- slov8(Spis,0,0,[]).
+
+nomer9:- read_stroka(A,_),slov9(A).
+
