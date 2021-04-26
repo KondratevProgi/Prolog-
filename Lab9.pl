@@ -196,3 +196,25 @@ slov10(Spis,Raz,SSlov):- spisok(Spis,Elem),append(SSlov,[Elem],SSlov1),
 slov10(Spis):- slov10(Spis,0,[]).
 
 nomer10:- read_stroka(A,_),slov10(A).
+
+%Nomer 11
+kol(_,[],_,_):- !,fail.
+kol(Spis,[H|T],K,Elem):- kol_spis(Spis,H,Kol),(Kol=K->
+   (Elem=H,true);kol(Spis,T,K,Elem)).
+
+slov11(_,N,Slov,N,K,M):- unic_spis(Slov,Unic),kol(Slov,Unic,K,Elem),Elem=97,
+       rovn(Slov,Elem,SlovNo),unic_spis(SlovNo,UnicElem),
+       kol(SlovNo,UnicElem,K,Elem1),Elem1=98,
+       rovn(SlovNo,Elem1,SlovNo1),unic_spis(SlovNo1,UnicElem1),
+       kol(SlovNo1,UnicElem1,K,Elem2),Elem2=99,
+       rovn(SlovNo1,Elem2,SlovNo2),unic_spis(SlovNo2,UnicElem2),
+       kol(SlovNo2,UnicElem2,M,Elem3),Elem3 = 100,
+       rovn(SlovNo2,Elem3,SlovNo3),unic_spis(SlovNo3,SlovNo3),
+       write_stroka(Slov),nl,!,fail.
+slov11(_,N,_,N,_,_):- !,fail.
+slov11(Spis,Raz,Slov,N,K,M):- spisok(Spis,Elem),append(Slov,[Elem],Slov1),
+       Raz1 is Raz+1,slov11(Spis,Raz1,Slov1,N,K,M).
+slov11(Spis,N,K,M):- slov11(Spis,0,[],N,K,M).
+
+nomer11:- write("Vvedite alfavit: "),read_stroka(A,_),write("Dlina alfavita: "),
+          read(N),read(K),read(M),slov11(A,N,K,M).
