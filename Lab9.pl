@@ -182,3 +182,17 @@ slov9(Spis):- slov8(Spis,0,0,[]).
 
 nomer9:- read_stroka(A,_),slov9(A).
 
+%Nomer 10
+razlich4([],[],0):- !.
+razlich4(_,[],0):- !,fail.
+razlich4(Spis,[H|T],Kol):- Kol1 is Kol-1,rovn(Spis,H,Spis1),
+         razlich4(Spis1,T,Kol1).
+
+slov10(_,7,Slov):- unic_spis(Slov,Unic),razlich4(Slov,Unic,4),
+       write_stroka(Slov),nl,!,fail.
+slov10(_,7,_):- !,fail.
+slov10(Spis,Raz,SSlov):- spisok(Spis,Elem),append(SSlov,[Elem],SSlov1),
+       Raz1 is Raz+1,slov10(Spis,Raz1,SSlov1).
+slov10(Spis):- slov10(Spis,0,[]).
+
+nomer10:- read_stroka(A,_),slov10(A).
