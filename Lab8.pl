@@ -26,3 +26,16 @@ kol_elem(Spis,Kol):- kol_elem(Spis,0,Kol).
 
 n1z1:- beret,read_spisstrok(Spis),max_stroka(Spis,Max),
         seen,write("Max stroka: "),write(Max).
+
+%Zadanie 2
+
+kol_strok_noprobel([],Kol,Kol):- !.
+kol_strok_noprobel([H|T],KKol,Kol):- ((kol_probel(H,0,K),K=0)->KKol1 is KKol+1;
+                 KKol1 is KKol),kol_strok_noprobel(T,KKol1,Kol).
+
+kol_probel([],Kol,Kol):- !.
+kol_probel([H|T],KKol,Kol):- (H=32->KKol1 is KKol+1;KKol1 is KKol),
+           kol_probel(T,KKol1,Kol).
+
+n1z2:- beret,read_spisstrok(Spis),kol_strok_noprobel(Spis,0,Kol),
+       seen,write("Kol strok no probel: "), write(Kol).
