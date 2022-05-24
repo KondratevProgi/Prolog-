@@ -204,3 +204,180 @@ end
 
 
 
+# Задание 4 и 5 и 6
+class Post
+  include Comparable
+  attr_reader :department,:name,:salary,:isfree
+  def initialize(department,name,salary,isfree)
+    self.department= department
+    self.name= name
+    self.salary=salary
+    self.isfree=isfree
+  end
+  def Post.isPost?(department,name,salary,isfree)
+    department.is_a?(String) & name.is_a?(String) & salary.is_a?(Integer) & (isfree.is_a?(TrueClass)|isfree.is_a?(FalseClass))
+  end
+   def Post.is_departments?(val)
+    Post.isPost?(val," ",1,true)
+  end
+   def Post.is_name?(val)
+    Post.isPost?("department",val,1,true)
+  end
+   def Post.is_salary?(val)
+    Post.isPost?("department","name",val,true)
+  end
+   def Post.is_isfree?(val)
+    Post.isPost?("department","name",1,val)
+  end
+  def department=(val)
+    @department=val if Post.is_departments?(val)
+  end
+  def name=(val)
+    @name =val if Post.is_name?(val)
+  end
+  def salary=(val) 
+    @salary = val if  Post.is_salary?(val)
+  end
+  def isfree=(val)
+    @isfree = val if  Post.is_isfree?(val)
+  end
+  def to_s()
+    tf={
+      true=>"да",
+      false=>"нет"
+    }
+    "Должность:#{self.name} отдел:#{self.department} зарплата:#{self.salary} занята: #{tf[self.isfree]}"
+  end
+  def <=>(val)
+  return 1 if self.isfree &  !val.isfree
+  return -1
+  end
+  def as_hash 
+    {
+      "department"=>self.department,
+      "name"=>self.name,
+      "salary"=>self.salary,
+      "isfree"=>self.isfree
+    }
+  end
+end
+class Post_list
+  include Enumerable
+  def initialize(posts=[])
+    @post_list=posts if Post_list.is_Post?(posts) || posts.size==0
+    self.post_cursor= nil
+  end
+  def Post_list.is_Post?(posts)
+    c=true
+    posts.each{|x| c=false if !x.is_a?(Post)}
+    return c
+  end
+  def each()
+    for i in @post_list do
+      yield i
+    end
+  end
+  def isempty?()
+    @post_list.size==0
+  end
+  def post_cursor=(val)
+    @post_cursor=@post_list.find{|x| x.name== val} if !(self.isempty?)
+  end
+  def post_cursor()
+    return @post_cursor
+  end
+  def post_add(post)
+    @post_list.push(post) 
+  end
+  def post_cursor_delete()
+    if !(self.isempty?) 
+      @post_list.delete(self.post_cursor) 
+       self.post_cursor=nil 
+    end
+  end
+  def post_read()
+    sum=""
+    self.each{|x| sum+=(x.to_s+"\n")}
+    return sum
+  end
+  def post_cursor_read()
+    self.post_cursor.to_s
+  end
+  def post_cursor_update(val)
+      @post_list[@post_list.find_index{|x| x==self.post_cursor}]= val
+      self.post_cursor= val.name 
+  end
+  def to_s()
+    self.post_read()
+  end
+  def mass_hash()
+    list = []
+    @post_list.each{|x| list.push(x.as_hash)}
+    return list
+  end
+  end
+
+
+
+
+
+
+
+
+
+number="+89181311793"
+a=Department.new("A",number)
+b=Department.new("A","+89181311794")
+c=Department.new("Z","+89181311795")
+deps = Department_list.new()
+a.duties_add("работать")
+deps.Departments_add(a)
+deps.Departments_add(b)
+deps.Departments_add(c)
+deps.Departments_cursor="A"
+puts(deps)
+deps.Departments_cursor.duties_add("не работать")
+puts(deps)
+deps.Departments_cursor= "Z"
+puts(deps.Departments_cursor)
+deps.Department_cursor_delete()
+puts(deps)
+deps.export_from_txt("text.txt")
+di = Department_list.import_from_txt("text.txt")
+di.Departments_cursor= "Z"
+di.export_from_YAML("ya.yaml")
+ro =Department_list.import_from_YAML("ya.yaml")
+po1= Post.new("отдел продаж","продажник",2001,true)
+po2= Post.new("отдел закупок","закупщик",5000,true)
+po3= Post.new("клеар","уборщик",10000,false)
+po = Post_list.new()
+po.post_add(po1)
+po.post_add(po2)
+po.post_add(po3)
+puts(po)
+po.post_cursor= "продажник"
+puts(po.post_cursor)
+po.post_cursor="уборщик"
+po.post_cursor_delete()
+puts(po)
+po.post_cursor="продажник"
+po.post_cursor_update(po3)
+puts(po)
+puts(po.post_cursor)
+puts "\n\n\n\n\n"
+puts(po)
+puts "\n\n\n\n\n"
+puts(ro)
+ro.Departments_cursor="A"
+puts(ro.Departments_cursor)
+ro.Departments_cursor.post_add(po1)
+ro.Departments_cursor.post_add(po2)
+ro.Departments_cursor.post_add(po3)
+puts()
+puts(ro.to_s_full)
+ro.export_from_txt("text.txt")
+ro.export_from_YAML("ya.yaml")
+ro11 = Department_list.import_from_YAML("ya.yaml")
+puts(ro11.to_s_full)
+ro11.Departments_cursor="A"
+puts(ro11.Departments_cursor.post_free)
