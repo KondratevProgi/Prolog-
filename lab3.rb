@@ -90,3 +90,98 @@ clss Department
       @post_list.select{|x| x.isfree == false}
     end
 end
+class Department_list
+  include Enumerable
+  def initialize(departmens=[])
+    @Department_list=departmens if Department_list.is_Departments?(departmens) || departmens.size==0
+    self.Departments_cursor= nil
+  end
+  def Department_list.is_Departments?(val)
+    c=true
+    val.each{|x| c=false if !x.is_a?(Department)}
+    return c
+  end
+  def each()
+    for i in @Department_list do
+      yield i
+    end
+  end
+  def isempty?()
+     @Department_list.size==0
+  end
+  def Departments_cursor=(val)
+    @Department_cursor=@Department_list.find{|x|x.name==val} if !(self.isempty?)
+  end
+  def Departments_cursor()
+    return @Department_cursor
+  end
+  def Departments_add(department)
+    @Department_list.push(department) if !(@Department_list.include?(department))
+  end
+  def Department_cursor_delete()
+    if !(self.isempty?) 
+    @Department_list.delete(self.Departments_cursor ) 
+    self.Departments_cursor= nil 
+    end
+  end
+  def Department_read()
+    sum=""
+    self.each{|x| sum+=(x.to_s+"\n")}
+    return sum
+  end
+  def Department_cursor_read()
+    self.Departments_cursor.to_s
+  end
+  def Department_cursor_update(val)
+    if  !@Department_list.include?(val)
+      @Department_list[@Department_list.find_index{|x| x==self.Departments_cursor}]= val
+      self.Departments_cursor= val
+    end
+  end
+  def Department_list.import_from_txt(href)
+    name=href[0,href.index(".")]
+    name=name+".yaml"
+    puts( system("del #{name}"))
+    puts(system("ren #{href} #{name}"))
+    rez=Department_list.import_from_YAML(name)
+    puts( system("del #{href}"))
+    puts(system("ren #{name} #{href}"))
+    rez
+  end
+  def export_from_txt(href)
+    name=href[0,href.index(".")]
+    name=name+".yaml"
+    self.export_from_YAML(name)
+   puts ( system("del #{href}"))
+   puts( system("ren #{name} #{href}"))
+  end
+  def to_s()
+    self.Department_read()
+  end
+  def export_from_YAML(href)
+    mass_dept=[]
+    self.each{|x| mass_dept.push(x.as_hash)}
+    File.open( href, 'w' ) do |out|
+      YAML.dump( mass_dept, out )
+    end
+  end
+  def Department_list.import_from_YAML(href)
+    ya = YAML.load_file(href)
+    mass_dept=[]
+    ya.each do |x|
+      name=x["name"]
+      number=x["number"]
+      duties=x["duties"]
+      posts=Post_list.new()
+      x["posts"].each{|y| posts.post_add(Post.new(y["department"],y["name"],y["salary"],y["isfree"]) )}
+      dep= Department.new(name,number,duties,posts)
+      mass_dept.push(dep)
+    end
+    new(mass_dept)
+  end
+  def to_s_full()
+    sum=""
+    self.each{|x| sum+=(x.to_s_full()+"\n")}
+    return sum
+  end
+end
