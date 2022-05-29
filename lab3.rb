@@ -244,3 +244,94 @@ class Post
       "isfree"=>self.isfree
     }
   end
+  class Salary_constructor
+    attr_accessor :salary_param
+    def initialize()
+      
+    end
+    def create_salary(hash={})
+      self.salary_param=hash
+      salary= Fix_sal.new(hash[:fixsal])
+      salary=Rub_sal.new(salary,hash[:rub_sal])
+      salary=Percent_sal.new(salary,hash[:percent_sal])
+      salary=Fine_sal.new(salary,hash[:fine_sal])
+      salary=Prem_sal.new(salary,hash[:prem_sal])
+      salary
+    end
+  class Salary
+    def get_salary()
+      raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
+    end
+  end
+  class Fix_sal < Salary
+    def initialize(fixed)
+      @fixed =fixed
+    end
+    def get_salary()
+      @fixed
+    end
+  end
+  class Decorator_salary < Salary
+    attr_accessor :salary
+    def initialize(salary)
+      self.salary=salary
+    end
+    def get_salary
+      self.salary.get_salary
+    end
+  end
+  class Rub_sal < Decorator_salary
+    def initialize(salary,add_rub)
+      @add_rub=add_rub
+      super(salary)
+    end
+    def get_salary()
+      self.salary.get_salary + @add_rub
+    end
+  end
+  class Percent_sal < Decorator_salary
+    def initialize(salary,percent)
+      super(salary)
+      @percent=percent
+    end
+    def get_salary()
+      r=rand() 
+      salary=self.salary.get_salary
+     return salary + salary*@percent/100 if r<0.5
+     return salary
+    end
+  end
+  class Fine_sal < Decorator_salary
+    def initialize(salary,fine)
+      super(salary)
+      @fine=fine
+    end
+    def get_salary()
+      self.salary.get_salary -  @fine
+    end
+  end
+  class Prem_sal < Decorator_salary
+    def initialize(salary,percent)
+      super(salary)
+      @percent=percent
+    end
+    def get_salary()
+      salary=self.salary.get_salary
+     return salary + salary*@percent/100
+    end
+  end
+  end
+  def get_salary(val)
+     @salary= @sal_creator.create_salary(val).get_salary
+  end
+  def set_job_list(val)
+    @job_list=val
+  end
+  def new_jobs(employee,stavka)
+    job= Job.new(self,employee,Time.new.inspect,end_work="empty",stawka)
+    @job_list.push(job)
+  end
+  def delete_jobs(employee)
+    @job_list.select{|x| x.pasport==employee.pasport}.map{|x| x.end_work=Time.new.inspect}
+  end
+  
